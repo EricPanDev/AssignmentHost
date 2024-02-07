@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matthew & Eric Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+        body {
+            margin:0px;
+        }
+        #main {
+            background-color: #f1f5f9;
+            align-items: center;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #notification {
+            text-align: center;
+            background-color: white;
+            color: black;
+            padding: 20px;
+            width: 50vw;
+            cursor: pointer;
+            transition: opacity 0.5s;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999; /* Ensure it's above other elements */
+        }
+
+        #notification2 {
+            text-align: center;
+            background-color: white;
+            color: black;
+            padding: 20px;
+            width: 30vw;
+            cursor: pointer;
+            transition: opacity 0.5s;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999; /* Ensure it's above other elements */
+            display: none;
+            font-size: 15px;
+        }
+
+        #expand_block_3 {
+            height: 25px; 
+            width: 5px; 
+            background-color: #f9d063;
+            opacity: 0; /* Initially set opacity to 0 for fade-in effect */
+            transition: opacity 2s, width 2s; /* Add transition for opacity and width change over 2 seconds */
+            z-index: 6;
+            border-radius: 12.5px 0 0 12.5px;
+        }
+        #extended_block {
+            height: 25px; 
+            width: 0; /* Initially set width to 0 */
+            background-color: #f3a139; /* Change color as needed */
+            transition: width 2s; /* Add transition for width change over 2 seconds */
+            z-index: 6;
+        }
+        .additional-block:nth-child(1) {
+            background-color: #f3a139; /* Change color as needed */
+        }
+        .additional-block:nth-child(2) {
+            background-color: #bb3268; /* Change color as needed */
+        }
+        .additional-block:nth-child(3) {
+            background-color: #6245af; /* Change color as needed */
+        }
+        .additional-block {
+            height: 25px;
+            width: 0; /* Initially set width to 0 */
+            transition: width 2s; /* Add transition for width change over 2 seconds */
+        }
+        .teeth-going-up {
+            top: 375px;
+            transition: top 0.5s ease; /* Transition property */
+            display: none;
+        }
+
+        .teeth-going-up.active {
+            top: 355px; /* New top position */
+            display: block; /* Display the element when active */
+        }
+        .teeth-going-down {
+            top: 382px;
+            transition: top 0.5s ease; /* Transition property */
+            display: none;
+        }
+
+        .teeth-going-down.active {
+            top: 398px; /* New top position */
+            display: block; /* Display the element when active */
+        }
+
+        .pole-going-up {
+            height: 0px;
+            transition: height 1.5s ease;
+        }
+
+        .pole-going-up.active {
+            height: 150px;
+        }
+        .pole-going-down {
+            height: 0px;
+            transition: height 1.5s ease;
+        }
+
+        .pole-going-down.active {
+            height: 150px;
+        }
+
+        @keyframes expandCircle {
+            0% {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            }
+            100% {
+            width: 75px;
+            height: 75px;
+            opacity: 1;
+            }
+        }
+
+        .circle-expanding {
+            opacity: 0;
+        }
+
+        .expand {
+            animation: expandCircle 2s ease forwards;
+    
+        }
+
+        .circle-label {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .circle-label.active {
+            opacity: 1;
+        }
+
+        .content-data {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .content-data.active {
+            opacity: 1;
+        }
+
+    </style>
+    <!-- 12.5px -->
+</head>
+<body>
+    <div id="main" style="width:1440px; height: 778px;position: relative;">
+
+        <div id="notification">
+            <h1>Matthew & Eric's Timeline</h1>
+            <p>Note: You can click on any event in the timeline to open a detailed view.</p>
+            <p>(Click to close)</p>
+
+            <p style="color:gray"><br>Coded by Eric Pan</p>
+        </div>
+
+        <div id="notification2" onclick="hideNotification()"> 
+            <h1>Matthew & Eric's Timeline</h1>
+            <p>Note: You can click on any event in the timeline to open a detailed view.</p>
+            <p>(Click to close)</p>
+
+            <p style="color:gray"><br>Coded by Eric Pan</p>
+        </div>
+
+
+        <span id="expand_block_3" onclick="display_1()"></span>
+        <span id="extended_block" onclick="display_2()"></span>
+        <span class="additional-block" onclick="display_3()"></span>
+        <span class="additional-block" onclick="display_4()"></span>
+        <span class="additional-block" onclick="display_5()"></span>
+        <!-- <img src="first.png" style="position: absolute; top: 382px; left: 300px; z-index: 5"> -->
+        <img class="teeth-going-down" src="first.png" style="position: absolute; left: 290px; z-index: 5">
+        <img class="teeth-going-up" src="second.png" style="position: absolute; left: 490px; z-index: 5">
+        <img class="teeth-going-down" src="third.png" style="position: absolute; left: 692px; z-index: 0">
+        <img class="teeth-going-up"src="fourth.png" style="position: absolute; left: 892px; z-index: 5">
+        <img class="teeth-going-down" src="fifth.png" style="position: absolute; left: 1090px; z-index: 0">
+
+        <div class="pole-going-up" style="position: absolute; width: 5px; background-color: #f9d063; bottom: 395px; left: 320px;" onclick="display_1()"></div>
+        <div class="pole-going-up" style="position: absolute; width: 5px; background-color: #ec532f; bottom: 395px; left: 720px;" onclick="display_3()"></div>
+        <div class="pole-going-up" style="position: absolute; width: 5px; background-color: #6245af; bottom: 395px; left: 1120px;" onclick="display_5()"></div>
+        <div class="pole-going-down" style="position: absolute; width: 5px; background-color: #f3a139; top: 393px; left: 515px;" onclick="display_2()"></div>
+        <div class="pole-going-down" style="position: absolute; width: 5px; background-color: #bb3268; top: 393px; left: 915px;" onclick="display_4()"></div>
+
+        <div class="circle-expanding" style="position: absolute; width: 5px; bottom: 545px; left: 322.5px; border: 6px solid #f9d063; width: 0px; height: 0px; transform: translate(-50%, 0); border-radius: 50%; background-color: white;" onclick="display_1()"></div>
+        <div class="circle-expanding" style="position: absolute; width: 5px; bottom: 545px; left: 722.5px; border: 6px solid #ec532f; width: 0px; height: 0px; transform: translate(-50%, 0); border-radius: 50%; background-color: white;" onclick="display_3()"></div>
+        <div class="circle-expanding" style="position: absolute; width: 5px; bottom: 545px; left: 1122.5px; border: 6px solid #6245af; width: 0px; height: 0px; transform: translate(-50%, 0); border-radius: 50%; background-color: white;" onclick="display_5()"></div>
+
+        <div class="circle-expanding" style="position: absolute; width: 5px; top: 540px; left: 517.5px; border: 6px solid #f3a139; width: 0px; height: 0px; transform: translate(-50%, 0); border-radius: 50%; background-color: white;" onclick="display_2()"></div>
+        <div class="circle-expanding" style="position: absolute; width: 5px; top: 540px; left: 917.5px; border: 6px solid #bb3268; width: 0px; height: 0px; transform: translate(-50%, 0); border-radius: 50%; background-color: white;" onclick="display_4()"></div>
+
+
+        <div class="circle-label" style="font-size: 24px; position: absolute; width: 100px; height: 50px; text-align: center; color: #f9d063; top:175px; left: 272px; font-weight: 400;" onclick="display_1()">1990</div>
+        <div class="circle-label" style="font-size: 24px; position: absolute; width: 100px; height: 50px; text-align: center; color: #ec532f; top:175px; left: 672px; font-weight: 400;" onclick="display_3()">1999</div>
+        <div class="circle-label" style="font-size: 24px; position: absolute; width: 100px; height: 50px; text-align: center; color: #6245af; top:175px; left: 1072px; font-weight: 400;" onclick="display_5()">2004</div>
+
+        <div class="circle-label" style="font-size: 24px; position: absolute; width: 100px; height: 50px; text-align: center; color: #f3a139; top:570px; left: 468px; font-weight: 400;" onclick="display_2()">1995</div>
+        <div class="circle-label" style="font-size: 24px; position: absolute; width: 100px; height: 50px; text-align: center; color: #bb3268; top:570px; left: 868px; font-weight: 400;" onclick="display_4()">2001</div>
+
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 200px; height: 50px; text-align: center; color: black; top:440px; left: 220px; font-weight: 400;"  onclick="display_1()">THE BEGINNING</div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 40px; height: 3px; text-align: center; top:470px; left: 300px; font-weight: 400; background-color: #f9d063;"></div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 200px; height: 50px; text-align: center; color: black; top:440px; left: 620px; font-weight: 400;"  onclick="display_3()">PILOT PHASE</div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 40px; height: 3px; text-align: center; top:470px; left: 700px; font-weight: 400; background-color: #ec532f;"></div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 300px; height: 50px; text-align: center; color: black; top:440px; left: 970px; font-weight: 400;" onclick="display_5()">PROJECT COMPLETION</div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 40px; height: 3px; text-align: center; top:470px; left: 1100px; font-weight: 400; background-color: #6245af;"></div>
+
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 300px; height: 50px; text-align: center; color: black; top:160px; left: 365px; font-weight: 400;" onclick="display_2()">SIGNIFICANT PROGRESS</div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 40px; height: 3px; text-align: center; top:190px; left: 495px; font-weight: 400; background-color: #f3a139;"></div>
+
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 200px; height: 50px; text-align: center; color: black; top:160px; left: 815px; font-weight: 400;" onclick="display_4()">FIRST DRAFT DONE</div>
+        <div class="content-data" style="font-size: 18px; position: absolute; width: 40px; height: 3px; text-align: center; top:190px; left: 895px; font-weight: 400; background-color: #bb3268;"></div>
+
+        <div  onclick="display_1()" class="content-data" style="font-size: 13px; position: absolute; width: 300px; height: 50px; text-align: center; color: gray; top:477px; left: 170px; font-weight: 400;">In April 1990, a plan by the NIE and DOE initiated the Human Genome Project, aiming to map and sequence the entire human genome within fifteen years. This effort involved international researchers and set the foundation for nearly fifteen years of continuous research towards completing the project.</div>
+
+        <div  onclick="display_3()" class="content-data" style="font-size: 13px; position: absolute; width: 300px; height: 50px; text-align: center; color: gray; top:477px; left: 570px; font-weight: 400;">In March 1999, the transition from the projects pilot phase changed to full scale sequencing of the entire human genome. Scientists started to slowly unravel mysteries without our DNA, leading to groundbreaking discoveries in genetics and medicine.</div>
+
+        <div  onclick="display_5()" class="content-data" style="font-size: 13px; position: absolute; width: 300px; height: 50px; text-align: center; color: gray; top:477px; left: 970px; font-weight: 400;">In 2003, the Human Genome Project had been completed, achieving its goal of sequencing the entire human genome by 2004. This event provided detailed understanding of human genetics. The International Human Genome Sequence was released on October 20, 2004. After the release, researchers started focusing on analyzing genome data. </div>
+
+
+        <div  onclick="display_2()" class="content-data" style="font-size: 13px; position: absolute; width: 300px; height: 50px; text-align: center; color: gray; top:197px; left: 365px; font-weight: 400;">In 1995, the Human Genome Project achieved significant milestones, including ones such as the completion of the first map of human chromosome 21. Collaborative efforts among international researchers continued to propel the project, with the publication of a physical map of the human genome laying the groundwork for further assembly.</div>
+
+        <div  onclick="display_4()" class="content-data" style="font-size: 13px; position: absolute; width: 300px; height: 50px; text-align: center; color: gray; top:197px; left: 765px; font-weight: 400;">In 2001, the project had reached a milestone after the first draft's publication of the human genome sequence by the International Human Genome Consortium. This publication corrected previous estimates and highlighted that human genomes are 99.9% identical. This achievement reflected the collaborative efforts of researchers and propelled the project towards completion.</div>
+
+
+
+        <script>
+
+            var html_1 = `<h1>THE BEGINNING</h1><br><p>In April of 1990, the NIE and DOE published a plan regarding the first five years of a fifteen year project. The goals created from the aftermath of the previous meeting resulted in the plan of mapping the human genome and determining the specific sequence of all 3.2 billion letters. This plan was essential to have the collaboration of international/foreign countries and its researchers for the development of the huge task of completing the sequence of the human genome. In summary, the beginning of the Human Genome Project laid the groundwork of research that would lead to almost 15 years of constant research and completion of the HGP.</p>`;
+            var html_2 = `<h1>SIGNIFICANT PROGRESS</h1><br><p>In 1995, the Human Genome Project made significant progress in the mapping and sequencing of the Human Genome. This year saw the establishment of the first complete map of human chromosome 21, which was a stepping stone for the progress of the Genome Project. Additionally, technological advancements, like improved DNA sequencing methods and automation contributed to the faster and concise to meet the 15 year plan of completion. Furthermore, researchers published their findings of a physical map of the human genome, which serves as the backbone for assembling the human genome. The collaborative efforts of international researchers and progression in 1995 paved the way for the completion of the Human Genome Project.</p>`;
+            var html_3 = `<h1>PILOT PHASE</h1><br><p>In March 1999, something big happened in science. It was a massive moment for the Human Genome Project, a huge teamwork effort to figure out the secrets in our DNA. They finished a test phase where they looked at a small part of the genome really closely to try out different methods.<br><br>Finishing this test phase was a big deal. It showed that the project could actually work and gave us a glimpse into how tricky it is to decode our genetic blueprint. With this success, they were ready for the real deal: figuring out all 3 billion base pairs in the human genome. It was like starting a big adventure, with scientists excited to dig into our DNA and find stuff that could totally change genetics and medicine.<br><br<So, with lots of passion and curiosity, these scientists started a huge mission. It was like exploring new places, pushing what we know, and uncovering secrets in those 3 billion letters of our DNA. Their hard work led to awesome discoveries that could change how we see ourselves and make big advancements in science. The Human Genome Project shows how determined we are to learn, and how much cool stuff we can find when we explore science.</p>`;
+            var html_4 = `<h1>FIRST DRAFT DRONE</h1><br><p>In 2001, the Human Genome Project achieved a major milestone of publishing the first draft of the human genome sequence. This initial analysis was published by the International  Human Genome Consortium, which contained corrected information and new data that was found with this publication. For instance, the number of human genes was originally thought of to be 35,000 but changed to 20,000. Researchers had also reported the new detail that the human sequence of an individual is 99.9% identical. This publication showcased the progress from coordinated efforts made by the researchers in 2001, which would lead to the eventual completion of the project.</p>`;
+            var html_5 = `<h1>PROJECT COMPLETION</h1><br><p>The HGP was officially completed in 2003 and by 2004 the major goals that was sequencing the entire human genome was achieved. The project had successfully identified and mapped all the genes in human DNA, which provided a better understanding of the human genetic footprint. 2004 of October 20 is when the International Human genome sequence, which shifted the effects of completing DNA sequences, which shifted the efforts of completing DNA sequences to the deep analysis / interpretation of the genome data. Researchers investigated specific genes and its relations with health conditions + variation/genetic mutations.</p>`;
+
+
+            function display_1() {
+                var elem = document.getElementById("notification2");
+                elem.innerHTML = html_1;
+                elem.style.display = "block";
+            }
+            function display_2() {
+                var elem = document.getElementById("notification2");
+                elem.innerHTML = html_2;
+                elem.style.display = "block";
+            }
+            function display_3() {
+                var elem = document.getElementById("notification2");
+                elem.innerHTML = html_3;
+                elem.style.display = "block";
+            }
+            function display_4() {
+                var elem = document.getElementById("notification2");
+                elem.innerHTML = html_4;
+                elem.style.display = "block";
+            }
+            function display_5() {
+                var elem = document.getElementById("notification2");
+                elem.innerHTML = html_5;
+                elem.style.display = "block";
+            }
+            
+
+            function setZoomToFitDiv(divWidth) {
+            const screenWidth = window.innerWidth;
+            const zoomLevel = (screenWidth / divWidth) * 100;
+            document.body.style.zoom = `${zoomLevel}%`;
+            }
+
+            setZoomToFitDiv(1440);
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var notification = document.getElementById('notification');
+                notification.addEventListener('click', function () {
+                    var colors = ["#ec532f", "#bb3268", "#6245af"] 
+                    notification.style.opacity = '0';
+                    setTimeout(function () {
+                        notification.style.display = 'none';
+                        var expandBlock3 = document.getElementById('expand_block_3');
+                        expandBlock3.style.opacity = '1'; // Set opacity to 1 to make block visible
+                        setTimeout(function () {
+                            expandBlock3.style.width = '200px'; // Animate width to 200px
+                            setTimeout(function () {
+                                var extendedBlock = document.getElementById('extended_block');
+                                extendedBlock.style.width = '200px'; // Animate width of extended block to 200px
+                                var additionalBlocks = document.querySelectorAll('.additional-block');
+                                var animations = [];
+                                var hasCalledTeethVisible = false; // Flag to ensure maketeethvisible() is called only once
+                                additionalBlocks.forEach(function(block, index) {
+                                    var animationPromise = new Promise(function(resolve) {
+                                        setTimeout(function() {
+                                            block.style.width = '200px'; // Animate width of additional block to 200px
+                                            block.style.backgroundColor = colors.shift();
+
+                                            if (colors.length === 0) {
+                                                block.style.borderRadius = "0 12.5px 12.5px 0";
+                                            }
+
+                                            block.style.zIndex = "100";
+                                            resolve();
+                                        }, (index + 1) * 1000); // Add a delay between each block's expansion
+                                    });
+                                    animations.push(animationPromise);
+                                });
+                                Promise.all(animations).then(function() {
+                                    // All animations are complete
+                                    if (!hasCalledTeethVisible) {
+                                        maketeethvisible1(); // Call the function after animations complete
+                                        hasCalledTeethVisible = true;
+                                    }
+                                });
+                            }, 2000); // milliseconds
+                        }, 2000); // milliseconds
+                    }, 500); // milliseconds
+                });
+            });
+
+            function maketeethvisible2() {
+                var elementsUp = document.querySelectorAll('.teeth-going-up');
+                var elementsDown = document.querySelectorAll('.teeth-going-down');
+
+                // Loop through elements with class "teeth-going-up" and set display to block
+                elementsUp.forEach(function(element) {
+                element.style.display = 'block';
+                });
+
+                // Loop through elements with class "teeth-going-down" and set display to block
+                elementsDown.forEach(function(element) {
+                element.style.display = 'block';
+                });
+            }
+
+            function grow_circles3() {
+
+                var elem = document.querySelectorAll('.content-data');
+
+                // Function to trigger the animation for each circle
+                elem.forEach(function(elem) {
+                    elem.classList.toggle('active');
+                });
+                }
+
+            function grow_circles2() {
+
+                var elem = document.querySelectorAll('.circle-label');
+
+                // Function to trigger the animation for each circle
+                elem.forEach(function(elem) {
+                    elem.classList.toggle('active');
+                });
+
+                setTimeout(grow_circles3, 1000)
+            }
+
+            function grow_circles() {
+
+                var circles = document.querySelectorAll('.circle-expanding');
+
+                // Function to trigger the animation for each circle
+                circles.forEach(function(circle) {
+                    circle.classList.add('expand');
+                });
+
+                setTimeout(grow_circles2, 1500)
+
+            }
+
+            function animate_bars() {
+
+                var poleGoingUpElements = document.querySelectorAll('.pole-going-up');
+
+                // Loop through each element and toggle the 'active' class
+                poleGoingUpElements.forEach(function(element) {
+                    element.classList.toggle('active');
+                });
+
+                var poleGoingDownElements = document.querySelectorAll('.pole-going-down');
+
+                // Loop through each element and toggle the 'active' class
+                poleGoingDownElements.forEach(function(element) {
+                    element.classList.toggle('active');
+                });
+
+                setTimeout(grow_circles, 1000)
+
+            }
+
+            function maketeethvisible3() {
+                // Get all elements with the class 'teeth-going-down'
+                var teethGoingDownElements = document.querySelectorAll('.teeth-going-down');
+
+                // Loop through each element and toggle the 'active' class
+                teethGoingDownElements.forEach(function(element) {
+                    element.classList.toggle('active');
+                });
+
+                // Get all elements with the class 'teeth-going-up'
+                var teethGoingUpElements = document.querySelectorAll('.teeth-going-up');
+
+                // Loop through each element and toggle the 'active' class
+                teethGoingUpElements.forEach(function(element) {
+                    element.classList.toggle('active');
+                });
+
+                setTimeout(animate_bars, 1000) 
+            }
+
+            function maketeethvisible1() {
+                setTimeout(maketeethvisible2, 1000)
+                setTimeout(maketeethvisible3, 1500)
+            }
+
+            function hideNotification() {
+            var notification = document.getElementById("notification2");
+            notification.style.display = "none";
+        }
+        </script>
+    </div>
+</body>
+</html>
